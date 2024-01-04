@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Main {
 	public static void main(String[] args) {
-		ex09();
+		ex13();
 	}
 	
 	public static void ex01() {
@@ -92,5 +92,42 @@ public class Main {
 		System.out.println((a*b)%c);
 		System.out.println(((a%c)*(b%c))%c);
 		
+	}
+	
+	public static void ex10() {	
+		int a, b;
+		Scanner scanner = new Scanner(System.in);
+		a = scanner.nextInt();
+		b = scanner.nextInt();
+
+		System.out.println(a*(b%10));
+		System.out.println(a*(b%100/10));
+		System.out.println(a*(b/100));
+		System.out.println(a*b);
+	}
+	
+	public static void ex11() {	
+		long a, b, c;
+		Scanner scanner = new Scanner(System.in);
+		a = scanner.nextLong();
+		b = scanner.nextLong();
+		c = scanner.nextLong();
+		
+		System.out.println(a+b+c);
+	}
+	
+	public static void ex12() {	
+		System.out.println("\\    /\\");
+		System.out.println(" )  ( ')");
+        System.out.println("(  /  )");
+        System.out.println(" \\(__)|");
+	}
+	
+	public static void ex13() {	
+		System.out.println("|\\_/|");
+		System.out.println("|q p|   /}");
+        System.out.println("( 0 )\"\"\"\\");
+        System.out.println("|\"^\"`    |");
+        System.out.println("||_/=\\\\__|");
 	}
 }
