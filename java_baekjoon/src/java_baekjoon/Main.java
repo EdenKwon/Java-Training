@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Main {
 	public static void main(String[] args) {
-		ex08();
+		ex09();
 	}
 	
 	public static void ex01() {
@@ -117,4 +117,21 @@ public class Main {
 			System.out.println("Case #" + i + ": " + 첫번째[i-1] + " + " + 두번째[i-1] + " = " + arr[i-1]);
 		}
 	}
+	
+	public static void ex09() {
+		Scanner sc = new Scanner(System.in); 
+		int n = sc.nextInt();
+		
+		for(int i=1; i<=n; i++) {
+			for(int j=n-1; j>i-1; j--) {
+				System.out.print(" ");
+			}
+			
+			for(int j=0; j<i; j++) {
+				System.out.print("*");
+			}
+			
+			System.out.println();
+		}
+	}	
 }
