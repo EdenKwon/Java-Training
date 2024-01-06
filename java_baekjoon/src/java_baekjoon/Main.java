@@ -1,13 +1,15 @@
 package java_baekjoon;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.*;
 
 public class Main {
-	public static void main(String[] args) {
-		ex09();
+	public static void main(String[] args) throws Exception {
+		ex11();
 	}
 	
 	public static void ex01() {
@@ -73,11 +75,19 @@ public class Main {
 		System.out.println("int");
 	}
 	
-	//보류
 	public static void ex06() throws IOException {
-		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-		String s = bf.readLine();
-		int i = Integer.parseInt(bf.readLine());	
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
+		int t = Integer.parseInt(br.readLine());
+		
+		for(int i=0; i<t; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            bw.write(a+b + "\n");
+        }
+        bw.flush();
 	}
 	
 	public static void ex07() {
@@ -123,6 +133,18 @@ public class Main {
 		int n = sc.nextInt();
 		
 		for(int i=1; i<=n; i++) {
+			for(int j=0; j<i; j++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+	}
+	
+	public static void ex10() {
+		Scanner sc = new Scanner(System.in); 
+		int n = sc.nextInt();
+		
+		for(int i=1; i<=n; i++) {
 			for(int j=n-1; j>i-1; j--) {
 				System.out.print(" ");
 			}
@@ -133,5 +155,23 @@ public class Main {
 			
 			System.out.println();
 		}
-	}	
+	}
+	
+	public static void ex11() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
+		while(true) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            
+            if(a==0 && b==0) {
+            	break;
+            } else {
+            	bw.write(a+b + "\n");
+            }
+        }
+		bw.flush();
+	}
 }
