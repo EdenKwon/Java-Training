@@ -1,167 +1,177 @@
 package java_baekjoon;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.*;
 
 public class Main {
-	public static void main(String[] args) {
-		ex07();
+	public static void main(String[] args) throws Exception {
+		ex11();
 	}
 	
 	public static void ex01() {
-		int a, b;
-		Scanner sc = new Scanner(System.in);
+		int n;
+		Scanner sc = new Scanner(System.in); 
+		n = sc.nextInt();
 		
-		a = sc.nextInt();
-		b = sc.nextInt();
-		
-		if(a > b) 
-			System.out.println(">");
-		else if (a == b)
-			System.out.println("==");
-		else
-			System.out.println("<");
+		for(int i=1; i<10; i++) {
+			System.out.println(n + " * " + i + " = " + n*i);
+		}
 	}
 	
 	public static void ex02() {
-		int a;
-		Scanner sc = new Scanner(System.in);
+		int n, a, b;
+		Scanner sc = new Scanner(System.in); 
+		n = sc.nextInt();
+		int arr[] = new int[n];
 		
-		a = sc.nextInt();
+		for(int i=0; i<n; i++) {
+			a = sc.nextInt();
+			b = sc.nextInt();
+			arr[i] = a + b;
+		}
 		
-		if(a >= 90) 
-			System.out.println("A");
-		else if(a >= 80) 
-			System.out.println("B");
-		else if(a >= 70)
-			System.out.println("C");
-		else if(a >= 60)
-			System.out.println("D");
-		else
-			System.out.println("F");
-	}
+		for(int result : arr) {
+			System.out.println(result);
+		}
+	}	
 	
 	public static void ex03() {
-		int a;
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in); 
+		int n = sc.nextInt();
+		int result = 0;
 		
-		a = sc.nextInt();
-		
-		if(a%4 == 0) {
-			if(a%100 == 0 && a%400 != 0) {
-				System.out.println("0");
-				return;
-			}
-			System.out.println("1");
-			return;
+		for(int i=n; i>0; i--) {
+			result = result + i;
 		}
-		System.out.println("0");
+		System.out.println(result);
 	}
 	
 	public static void ex04() {
-		int a, b;
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in); 
+		int total = sc.nextInt();
+		int tCount = sc.nextInt();
+		int sum = 0;
 		
-		a = sc.nextInt();
-		b = sc.nextInt();
-		
-		checkQuadrant(a, b);
-	}
-	
-	public static void checkQuadrant(int a, int b) {
-		if(a > 0) {
-			if (b > 0) {
-				System.out.println("1");
-				return;
-			}
-			System.out.println("4");
-			return;
+		for(int i=0; i<tCount; i++) {
+			int price = sc.nextInt();
+			int iCount = sc.nextInt();
+			sum = sum + price*iCount;
 		}
 		
-		if (b > 0) {
-			System.out.println("2");
-			return;
-		}
-		System.out.println("3");
-		return;
+		System.out.println(total == sum ? "Yes" : "No");
 	}
 	
 	public static void ex05() {
-		int a, b;
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in); 
+		int n = sc.nextInt();
 		
-		a = sc.nextInt();
-		b = sc.nextInt();
-		
-		if(b < 45) {
-			a = a - 1;
-			b = 60 - (45 - b);
-			if(a == -1)
-				a = 23;
-			System.out.println(a + " " + b);
-			return;
+		for(int i=0; i<n/4; i++) {
+			System.out.print("long ");
 		}
-		
-		else
-			System.out.println(a + " " + (b-45));
+		System.out.println("int");
 	}
 	
-	public static void ex06() {
-		int a, b, c;
-		Scanner sc = new Scanner(System.in);
+	public static void ex06() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-		a = sc.nextInt();
-		b = sc.nextInt();
-		c = sc.nextInt();
+		int t = Integer.parseInt(br.readLine());
 		
-		b = b + c;
-		if(b/60 != 0) { //시간 업데이트가 필요할 경우. 이 구문을 메서드로 넘겨도 될듯.
-			a = a + (b/60);
-			b = b % 60;
-			if(a >= 24)
-				a = a % 24;
-		}
-		
-		System.out.println(a + " " + b);
+		for(int i=0; i<t; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            bw.write(a+b + "\n");
+        }
+        bw.flush();
 	}
 	
 	public static void ex07() {
-		int a, b, c;
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in); 
+		int n = sc.nextInt();
+		int arr[] = new int[n];
 		
-		a = sc.nextInt();
-		b = sc.nextInt();
-		c = sc.nextInt();
-		
-		if (a == b && b == c)  {
-			System.out.println(10000 + a*1000);
+		for(int i=0; i<n; i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			
+			arr[i] = a+b;
 		}
 		
-		else if (a==b || b==c || c==a) {
-			System.out.println(1000 + getSame(a,b,c)*100);
+		for(int i=1; i<=n; i++) {
+			System.out.println("Case #" + i + ": " + arr[i-1]);
 		}
-		
-		else 
-			System.out.println(max(a,b,c)*100);
 	}
 	
-	static int getSame(int a, int b, int c) {
-		if(a == b)
-			return a;
-		else
-			return c;
-	}
-
-	static int max(int a, int b, int c) {
-		if(a>b) {
-			if(a>c) {
-				return a;
-			}
-			else
-				return c;
+	public static void ex08() {
+		Scanner sc = new Scanner(System.in); 
+		int n = sc.nextInt();
+		int arr[] = new int[n];
+		int 첫번째[] = new int[n];
+		int 두번째[] = new int[n];
+		
+		for(int i=0; i<n; i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			
+			첫번째[i] = a;
+			두번째[i] = b; 
+			arr[i] = a+b;
 		}
-		else if(b>c)
-			return b;
-		else 
-			return c;
+		
+		for(int i=1; i<=n; i++) {
+			System.out.println("Case #" + i + ": " + 첫번째[i-1] + " + " + 두번째[i-1] + " = " + arr[i-1]);
+		}
+	}
+	
+	public static void ex09() {
+		Scanner sc = new Scanner(System.in); 
+		int n = sc.nextInt();
+		
+		for(int i=1; i<=n; i++) {
+			for(int j=0; j<i; j++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+	}
+	
+	public static void ex10() {
+		Scanner sc = new Scanner(System.in); 
+		int n = sc.nextInt();
+		
+		for(int i=1; i<=n; i++) {
+			for(int j=n-1; j>i-1; j--) {
+				System.out.print(" ");
+			}
+			
+			for(int j=0; j<i; j++) {
+				System.out.print("*");
+			}
+			
+			System.out.println();
+		}
+	}
+	
+	public static void ex11() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
+		while(true) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            
+            if(a==0 && b==0) {
+            	break;
+            } else {
+            	bw.write(a+b + "\n");
+            }
+        }
+		bw.flush();
 	}
 }
