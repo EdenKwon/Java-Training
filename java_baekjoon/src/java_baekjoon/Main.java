@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
-		ex07();
+		ex10();
 	}
 	
 	public static void ex01() throws IOException {
@@ -171,5 +171,127 @@ public class Main {
 		
 		bw.flush();
 		bw.close();
+	}
+	
+	public static void ex08() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int arr[] = new int[10];
+		
+		for (int i = 0; i < 10; i++) {
+			arr[i] = Integer.parseInt(br.readLine()) % 42;
+		}
+		
+		int count = 0;
+		for (int i = 0; i < 10; i++) {
+			int temp = 0;
+			for (int j = i + 1; j < 10; j++) {
+				if (arr[i] == arr[j]) {
+					temp++;
+				}
+			}
+			if (temp == 0) {
+				count++;
+			}
+		}
+		
+		bw.write(count + "\n");
+		
+		bw.flush();
+		bw.close();
+	}
+	
+	public static void ex08_1() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		for (int i = 0; i < 10; i++) {
+			list.add(Integer.parseInt(br.readLine()) % 42);
+		}
+		
+		Set<Integer> uniqueSet = new HashSet<>(list);
+		int uniqueCount = uniqueSet.size();
+		
+		bw.write(uniqueCount + "\n");
+		
+		bw.flush();
+		bw.close();
+	}
+	
+	public static void ex09() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+
+		int total = Integer.parseInt(st.nextToken());
+		int count = Integer.parseInt(st.nextToken());
+		int arr[] = new int[total];
+		for(int i=0; i<total; i++) {
+			Arrays.fill(arr, i, i+1, i+1);
+		}
+		
+		for (int i=0; i<count; i++) {
+			st = new StringTokenizer(br.readLine());
+			int start = Integer.parseInt(st.nextToken());
+			int end = Integer.parseInt(st.nextToken());
+			int tempArr[] = new int[end-start+1];
+			
+			for(int j=0; j<end-start+1; j++) {
+				tempArr[j] = arr[end-j-1];
+			}
+			
+			for (int k=0; k<end-start+1; k++) {
+				arr[start + k - 1] = tempArr[k];
+			}
+		}
+		for (int i : arr) {
+			bw.write(i + " ");
+		}
+
+		bw.flush();
+		bw.close();
+	}
+	
+	public static void ex10() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int total = Integer.parseInt(br.readLine());
+        double arr[] = new double[total];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        
+		for (int i = 0; i < total; i++) {
+			arr[i] = Integer.parseInt(st.nextToken());
+		}
+		
+        int max = getArrMax(arr);
+		
+		for (int i = 0; i < total; i++) {
+			arr[i] = arr[i] * 100 / max;
+		}
+		
+        bw.write(Double.toString(getArrAvg(arr)));
+        
+        bw.flush();
+        bw.close();
+	}
+	
+	public static int getArrMax(double arr[]) {
+		int max = 0;
+        for (double i : arr) {
+            if (max < i) {
+                max = (int)i;
+            }
+        }
+        return max;
+	}
+	
+	public static double getArrAvg(double arr[]) {
+		double sum = 0;
+		for (double i : arr) {
+			sum += i;
+		}
+		return (double)sum / arr.length;
 	}
 }
