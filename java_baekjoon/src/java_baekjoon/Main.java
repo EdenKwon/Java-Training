@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
-		ex09();
+		ex11();
 	}
 
 	public static void ex01() throws Exception {
@@ -116,4 +116,76 @@ public class Main {
 			System.out.println(num2);
 		}
 	}
+	
+	public static void ex10() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String word = br.readLine();
+        
+        StringTokenizer st = new StringTokenizer(word);
+        String[] arr = new String[st.countTokens()];
+        arr = word.split("");
+        
+		int count = 0;
+		
+		for (int i = 0; i < arr.length; i++) {
+			switch (arr[i]) {
+				case "A":
+				case "B":
+				case "C":
+					count += 3;
+					break;
+				case "D":
+				case "E":
+				case "F":
+					count += 4;
+					break;
+				case "G":
+				case "H":
+				case "I":
+					count += 5;
+					break;
+				case "J":
+				case "K":
+				case "L":
+					count += 6;
+					break;
+				case "M":
+				case "N":
+				case "O":
+					count += 7;
+					break;
+				case "P":
+				case "Q":
+				case "R":
+				case "S":
+					count += 8;
+					break;
+				case "T":
+				case "U": 
+				case "V":
+					count += 9;
+					break;
+				case "W":
+				case "X":
+				case "Y":
+				case "Z":
+					count += 10;
+					break;
+			}
+		}
+		System.out.println(count);
+    }
+	
+	public static void ex11() throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		String word;
+		
+		while ((word = br.readLine()) != null) {
+			bw.write(word + "\n");
+		}
+		bw.flush();
+		bw.close();	
+	}
+
 }
