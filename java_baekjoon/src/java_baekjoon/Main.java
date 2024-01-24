@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
-        ex05();
+        ex07();
 	}
 	
 	public static void ex01() throws Exception {
@@ -127,6 +127,58 @@ public class Main {
         }
 		
 		bw.write(count + "");
+		bw.flush();
+		bw.close();
+	}
+	
+	public static void ex06() throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
+		int num = Integer.parseInt(br.readLine());
+		int denominator = 1, numerator = 1;
+		boolean flag = false;
+		
+		for(int i=1; i<num; i++) {
+			if(flag == true && denominator == 1) {
+				numerator += 1;
+				flag = false;
+			}
+			
+			else if (flag == false &&numerator == 1) {
+				denominator += 1;
+				flag = true;
+			}
+
+			else if (flag) {
+				numerator += 1;
+				denominator -= 1;
+			}
+
+			else {
+				numerator -= 1;
+				denominator += 1;
+			}
+		}
+		
+		bw.write(numerator + "/" + denominator);
+		bw.flush();
+		bw.close();
+	}
+	
+	public static void ex07() throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		int morning = Integer.parseInt(st.nextToken());
+		int evening = Integer.parseInt(st.nextToken());
+		int height = Integer.parseInt(st.nextToken());
+		
+		int days = (int) Math.ceil((double) (height - morning) / (morning - evening)) + 1;
+		
+		bw.write(days + "");
+		
 		bw.flush();
 		bw.close();
 	}
