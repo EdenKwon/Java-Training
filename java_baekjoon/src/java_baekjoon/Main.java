@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
-		ex03();
+		ex04();
 	}
 	
 	public static void ex01() throws Exception {
@@ -96,4 +96,38 @@ public class Main {
 		else
 			sb.append(num + " is NOT perfect.\n");
 	}
+	
+	public static void ex04() throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int num = Integer.parseInt(br.readLine());
+		int count = 0;
+		
+		StringTokenizer st = new StringTokenizer(br.readLine());
+        int[] arr = new int[num];
+        
+		for (int i = 0; i < num; i++) {
+			arr[i] = Integer.parseInt(st.nextToken());
+			if (isPrime(arr[i]))
+				count++;
+		}
+		
+		bw.write(count + "");
+		bw.flush();
+		bw.close();
+	}
+	
+	public static boolean isPrime(int num) {
+        if (num <= 1) {
+            return false;
+        }
+        
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
