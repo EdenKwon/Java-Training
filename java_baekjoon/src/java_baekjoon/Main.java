@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
-		ex04();
+		ex06();
 	}
 	
 	public static void ex01() throws Exception {
@@ -130,4 +130,65 @@ public class Main {
 
         return true;
     }
+	
+	public static void ex05() throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int lowNum = Integer.parseInt(br.readLine());
+        int highNum = Integer.parseInt(br.readLine());
+        int sum = 0, min = 0;
+        
+        for (int i = lowNum; i <= highNum; i++) {
+            if(isPrime(i)) {
+            	sum += i;
+            	if(min == 0) min = i;
+            }
+        }
+        if(sum == 0) bw.write("-1");
+        else bw.write(sum + "\n" + min);
+        
+        bw.flush();
+        bw.close();
+	}
+	
+	public static void ex06() throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int num = Integer.parseInt(br.readLine());
+
+		for (int i = 2; i <= Math.sqrt(num); i++) {
+			while(num % i == 0) {
+				bw.write(i + "\n");
+				num /= i;
+			}
+		}
+
+		if (num != 1) {
+			bw.write(num + "");
+		}
+		bw.flush();
+		bw.close();
+	}
+	
+	public static void ex06_1() throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
+		StringBuffer sb = new StringBuffer();
+		int N = Integer.parseInt(br.readLine());
+		br.close();
+		for ( int i = 2 ; i <= Math.sqrt(N) ; i++ ) {
+			while( N % i == 0 ) {
+				sb.append(i).append("\n");
+				N /= i;
+			}
+		}
+		
+		// 1인 경우 아무것도 출력하지 않으므로 분기 추가
+		if (N != 1) {
+			sb.append(N);
+		}
+		bw.write(sb.toString());
+		bw.close();
+	}
 }
