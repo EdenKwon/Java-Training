@@ -6,57 +6,35 @@ import java.nio.charset.StandardCharsets;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
-		ex06();
+		ex08();
 	}
 	
 	public static void ex01() throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        
-        while(true) {
-        	StringTokenizer st = new StringTokenizer(br.readLine());
-
-            int num1 = Integer.parseInt(st.nextToken());
-            int num2 = Integer.parseInt(st.nextToken());	
-        	
-            if(num1 == 0 && num2 == 0) break;
-            
-			if (num1 % num2 == 0)
-				bw.write("multiple\n");
-			else if (num2 % num1 == 0)
-				bw.write("factor\n");
-			else
-				bw.write("neither\n");
-        }
-        
-        bw.flush();
-        bw.close();
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
+		int width = Integer.parseInt(br.readLine());
+		int height = Integer.parseInt(br.readLine());
+		
+		bw.write(width * height + "");
+		
+		bw.flush();
+		bw.close();
 	}
 	
 	public static void ex02() throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		int n = Integer.parseInt(st.nextToken());
-		int k = Integer.parseInt(st.nextToken());
-		int count = 0;
 		
-		for (int i = 1; i <= n; i++) {
-			if(n%i == 0) {
-				count ++;
-				if (count == k) {
-					bw.write(i + "");
-					break;
-				}
-				
-				if (i == n) {
-					bw.write("0");
-					break;
-				}
-			}
-		}
+		int x = Integer.parseInt(st.nextToken());
+		int y = Integer.parseInt(st.nextToken());
+		int w = Integer.parseInt(st.nextToken());
+		int h = Integer.parseInt(st.nextToken());
 		
+		int min = Math.min(Math.min(x, w-x), Math.min(y, h-y));
+		bw.write(min + "");
+
 		bw.flush();
 		bw.close();
 	}
@@ -64,131 +42,120 @@ public class Main {
 	public static void ex03() throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
-		
-		while(true) {
-			int num = Integer.parseInt(br.readLine());
-			if(num == -1) break;
-			
-			checkPerfect(num, sb);
+		int[][] points = new int[3][2];
+
+		for (int j = 0; j < 3; j++) {
+		    StringTokenizer st = new StringTokenizer(br.readLine());
+		    points[j][0] = Integer.parseInt(st.nextToken());
+		    points[j][1] = Integer.parseInt(st.nextToken());
 		}
 		
-		bw.write(sb.toString());
+		int x = 0, y = 0;
+		
+		for (int i = 0; i < 3; i++) {
+		    x ^= points[i][0];
+		    y ^= points[i][1];
+		}
+		
+		bw.write(x + " " + y);
+		
 		bw.flush();
 		bw.close();
-	}
-	
-	public static void checkPerfect(int num, StringBuilder sb) throws Exception {
-		int sum = 0;
-		StringBuilder divisors = new StringBuilder();
-		
-		for (int i = 1; i < num; i++) {
-			if (num % i == 0) {
-				sum += i;
-				divisors.append(i).append(" + ");
-			}
-		}
-		
-		if (sum == num) {
-			divisors.setLength(divisors.length() - 3);
-			sb.append(num).append(" = ").append(divisors).append("\n");
-		}
-		else
-			sb.append(num + " is NOT perfect.\n");
 	}
 	
 	public static void ex04() throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		int num = Integer.parseInt(br.readLine());
-		int count = 0;
+		long num = Long.parseLong(br.readLine());
 		
-		StringTokenizer st = new StringTokenizer(br.readLine());
-        int[] arr = new int[num];
-        
-		for (int i = 0; i < num; i++) {
-			arr[i] = Integer.parseInt(st.nextToken());
-			if (isPrime(arr[i]))
-				count++;
-		}
-		
-		bw.write(count + "");
+		bw.write(num * 4 + "");
 		bw.flush();
 		bw.close();
 	}
 	
-	public static boolean isPrime(int num) {
-        if (num <= 1) {
-            return false;
-        }
-        
-        for (int i = 2; i <= Math.sqrt(num); i++) {
-            if (num % i == 0) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-	
 	public static void ex05() throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        int lowNum = Integer.parseInt(br.readLine());
-        int highNum = Integer.parseInt(br.readLine());
-        int sum = 0, min = 0;
-        
-        for (int i = lowNum; i <= highNum; i++) {
-            if(isPrime(i)) {
-            	sum += i;
-            	if(min == 0) min = i;
-            }
-        }
-        if(sum == 0) bw.write("-1");
-        else bw.write(sum + "\n" + min);
-        
-        bw.flush();
-        bw.close();
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int num = Integer.parseInt(br.readLine());
+		int points[][] = new int[num][2];
+		int maxX = -10000, maxY = -10000, minX = 10000, minY = 10000;
+		
+		for (int i = 0; i < num; i++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			points[i][0] = Integer.parseInt(st.nextToken());
+			points[i][1] = Integer.parseInt(st.nextToken());
+			if(points[i][0] > maxX) maxX = points[i][0];
+			if(points[i][0] < minX) minX = points[i][0];
+			if(points[i][1] > maxY) maxY = points[i][1];
+			if(points[i][1] < minY) minY = points[i][1];
+		}
+		
+		int area = (maxX - minX) * (maxY - minY);
+		bw.write(area + "");
+		bw.flush();
+		bw.close();
 	}
 	
 	public static void ex06() throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		int num = Integer.parseInt(br.readLine());
-
-		for (int i = 2; i <= Math.sqrt(num); i++) {
-			while(num % i == 0) {
-				bw.write(i + "\n");
-				num /= i;
-			}
-		}
-
-		if (num != 1) {
-			bw.write(num + "");
-		}
+		
+		int angle1 = Integer.parseInt(br.readLine());
+		int angle2 = Integer.parseInt(br.readLine());
+		int angle3 = Integer.parseInt(br.readLine());
+		
+		if (angle1 + angle2 + angle3 != 180)
+			bw.write("Error");
+		else if (angle1 == angle2 && angle2 == angle3)
+			bw.write("Equilateral");
+		else if (angle1 == angle2 || angle2 == angle3 || angle1 == angle3)
+			bw.write("Isosceles");
+		else
+			bw.write("Scalene");
+		
 		bw.flush();
 		bw.close();
 	}
 	
-	public static void ex06_1() throws Exception {
+	public static void ex07() throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
-		StringBuffer sb = new StringBuffer();
-		int N = Integer.parseInt(br.readLine());
-		br.close();
-		for ( int i = 2 ; i <= Math.sqrt(N) ; i++ ) {
-			while( N % i == 0 ) {
-				sb.append(i).append("\n");
-				N /= i;
-			}
+
+		while(true) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+            
+            if(a == 0 && b == 0 && c == 0) break;
+            
+			if (a == b && b == c)
+				bw.write("Equilateral" + "\n");
+			else if (a + b <= c || a + c <= b || b + c <= a)
+				bw.write("Invalid" + "\n");
+			else if (a == b || b == c || a == c)
+				bw.write("Isosceles" + "\n");
+			else
+				bw.write("Scalene" + "\n");
 		}
 		
-		// 1인 경우 아무것도 출력하지 않으므로 분기 추가
-		if (N != 1) {
-			sb.append(N);
-		}
-		bw.write(sb.toString());
+		bw.flush();
+		bw.close();
+	}
+	
+	public static void ex08() throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+		int[] side = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+		Arrays.sort(side);
+		
+		if(side[2] >= side[0] + side[1])
+			side[2] = side[0] + side[1] - 1;
+		
+		bw.write(side[0] + side[1] + side[2] + "");
+		
+		bw.flush();
 		bw.close();
 	}
 }
