@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
-		ex03();
+		ex04();
 	}
 
 	public static void ex01() throws Exception {
@@ -158,5 +158,76 @@ public class Main {
         
 		bw.flush();
 		bw.close();
+	}
+	
+	public static char currentColor = 'B';
+	
+	public static void ex04() throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
+		int minCount = 64;
+		
+		char chess[][] = new char[N][M];
+		
+		for (int i = 0; i < N; i++) {
+			char[] line = br.readLine().toCharArray();
+		    System.arraycopy(line, 0, chess[i], 0, Math.min(line.length, M));
+		}
+		
+		for (int i = 0; i < N - 7; i++) {
+			for (int j = 0; j < M - 7; j++) {
+				int count = checkMin(chess, i, j);
+				
+				if (count < minCount) {
+					minCount = count;
+				}
+			}
+		}
+		
+		
+		bw.write(minCount + "");
+		
+		bw.flush();
+		bw.close();
+	}
+	
+	public static int checkMin(char[][] chess, int N, int M) {
+		int count1 = 0;
+		int count2 = 0;
+		
+		for (int i = N; i < N + 8; i++) {
+			changeColor();
+			for (int j = M; j < M + 8; j++) {
+				if (chess[i][j] != currentColor) {
+					count1++;
+				}
+				changeColor();
+			}
+		}
+		
+		changeColor();
+		
+		for (int i = N; i < N + 8; i++) {
+			changeColor();
+			for (int j = M; j < M + 8; j++) {
+				if (chess[i][j] != currentColor) {
+					count2++;
+				}
+				changeColor();
+			}
+		}
+		return Math.min(count1, count2);
+	}
+	
+	public static void changeColor() {
+		if (currentColor == 'B') {
+			currentColor = 'W';
+		} else {
+			currentColor = 'B';
+		}
 	}
 }
