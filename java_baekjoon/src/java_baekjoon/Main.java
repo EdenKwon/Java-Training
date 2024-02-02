@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
-		ex04();
+		ex06();
 	}
 
 	public static void ex01() throws Exception {
@@ -229,5 +229,63 @@ public class Main {
 		} else {
 			currentColor = 'B';
 		}
+	}
+	
+	public static void ex05() throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		int num = Integer.parseInt(br.readLine());
+		
+		get666(num);
+	}
+	
+	public static void get666(int num) throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int count = 0;
+		int i = 0;
+
+		while (true) {
+			if (String.valueOf(i).contains("666")) {
+				count++;
+			}
+
+			if (count == num) {
+				bw.write(i + "");
+				break;
+			}
+			i++;
+		}
+		
+		bw.flush();
+		bw.close();
+	}
+	
+	public static void ex06() throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+		int num = Integer.parseInt(br.readLine());
+		int bag5 = 0;
+		int bag3 = 0;
+		int min = 0;
+		
+		for(int i=0; i<=num/5; i++) {
+			bag5 = i;
+            bag3 = (num - 5 * i) / 3;
+            if (5 * bag5 + 3 * bag3 == num) {
+                min = bag5 + bag3;
+            }
+		}
+		
+		if (min == 0) {
+			bw.write("-1");
+		}
+		
+		else {
+			bw.write(min + "");
+		}
+		
+		bw.flush();
+		bw.close();
 	}
 }
