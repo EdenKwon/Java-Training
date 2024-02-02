@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.nio.charset.StandardCharsets;
 
-public class Chapter5 {
+public class Chapter05 {
 	public static void main(String[] args) throws Exception {
 		ex11();
 	}

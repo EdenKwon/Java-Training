@@ -2,7 +2,7 @@ package java_baekjoon;
 
 import java.util.*;
 
-public class Chapter1 {
+public class Chapter01 {
 	public static void main(String[] args) {
 		ex13();
 	}
